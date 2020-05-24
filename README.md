@@ -1,9 +1,11 @@
-# Go-Web
-Learning Web Development with Go
+# Go  - 🖼 Photoz 🖼
 
-Resources: Jon Calhoun's awesome [course](https://www.usegolang.com/)
+Learning web development with Go by making a photo gallery.
 
-### Lens locked
+- Hot reloading with [Fresh](https://github.com/gravityblast/fresh) 
+- [Gorilla/mux](https://github.com/gorilla/mux) router 
 
-A photo gallery app
+
+Resources: Jon Calhoun's [course](https://www.usegolang.com/)
+
 

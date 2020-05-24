@@ -1,8 +1,8 @@
 package main
 
 import (
+	"Go-Web/views"
 	"fmt"
-	"html/template"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -15,12 +15,14 @@ func handlerFunc(w http.ResponseWriter, r *http.Request) {
 }
 
 //temporary global var
-var homeTemplate *template.Template
-var contactTemplate *template.Template
+var homeView *views.View
+var contactView *views.View
 
 func home(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	if err := homeTemplate.Execute(w, nil); err != nil {
+
+	err := homeView.Template.Execute(w, nil)
+	if err != nil {
 		//not a good idea to panic here, will clean up later
 		panic(err)
 	}
@@ -28,7 +30,8 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 func contact(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	if err := contactTemplate.Execute(w, nil); err != nil {
+	err := contactView.Template.Execute(w, nil)
+	if err != nil {
 		panic(err)
 	}
 }
@@ -40,14 +43,10 @@ func notFound(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	//parse the template when main starts
-	var err error
-	//here we don't use := so that we actually use the global scope vars
-	homeTemplate, err = template.ParseFiles("views/home.gohtml", "views/layouts/footer.gohtml")
-	if err != nil {
-		panic(err)
-	}
-	contactTemplate, err = template.ParseFiles("views/contact.gohtml", "views/layouts/footer.gohtml")
+	homeView = views.NewView("views/home.gohtml")
+
+	contactView = views.NewView("views/contact.gohtml")
+
 	r := mux.NewRouter()
 	r.NotFoundHandler = http.HandlerFunc(notFound)
 	r.HandleFunc("/", home)
