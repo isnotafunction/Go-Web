@@ -23,8 +23,15 @@ func contact(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "<h1>Contact page</h1>")
 }
 
+func notFound(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	w.WriteHeader(http.StatusNotFound)
+	fmt.Fprint(w, "<h1>Such empty...</h1>")
+}
+
 func main() {
 	r := mux.NewRouter()
+	r.NotFoundHandler = http.HandlerFunc(notFound)
 	r.HandleFunc("/", home)
 	r.HandleFunc("/contact", contact)
 	http.ListenAndServe(":3000", r)
