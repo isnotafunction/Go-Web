@@ -48,8 +48,11 @@ func main() {
 	contactView = views.NewView("base", "views/contact.gohtml")
 
 	r := mux.NewRouter()
-	r.NotFoundHandler = http.HandlerFunc(notFound)
+	staticDir := "/static/"
+	r.PathPrefix(staticDir).
+		Handler(http.StripPrefix(staticDir, http.FileServer(http.Dir("."+staticDir))))
 	r.HandleFunc("/", home)
 	r.HandleFunc("/contact", contact)
+	r.NotFoundHandler = http.HandlerFunc(notFound)
 	http.ListenAndServe(":3000", r)
 }
