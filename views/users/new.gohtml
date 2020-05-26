@@ -1,0 +1,14 @@
+{{define "content"}}
+    <h1>Sign up</h1>
+    {{template "signupForm"}}
+{{end}}
+
+{{define "signupForm"}}
+    <form class="SignUpForm" action="/signup" method="POST">
+    <label class="SignUpForm-label" for="email">Email:</label>
+    <input class="SignUpForm-input" type="email" name="email" id="email">
+    <label class="SignUpForm-label" for="password">Password:</label>
+    <input class="SignUpForm-input" type="password" name="password" id="password">
+    <button class="SignUpForm-button" type="submit">Submit</button>
+    </form>
+{{end}}

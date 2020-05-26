@@ -1,5 +1,6 @@
 :root {
     --color-background: #fffbf6;
+    --color-border-input: #bdcdd8;
     --color-copy: #59656D;
     --color-copy-dark: #333d43;
     --color-border-light:#ffdab9;
@@ -14,6 +15,13 @@ body{
     margin: 0;
     padding: 0;
     color:#59656D;
+}
+
+main{
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .NavBar{
@@ -34,3 +42,49 @@ body{
     color: var(--color-copy-dark);
     transition: all 0.25s;
 }
+
+.SignUpForm{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(90%, 31.25rem);
+}
+
+.SignUpForm-label{
+    width: min(90%, 21.875rem);
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.SignUpForm-input{
+    height: 40px;
+    width: min(90%, 21.875rem);
+    border-radius: 3px;
+    border: 1px solid var( --color-border-input);
+    padding: 0 0.625rem;
+    margin-bottom: 1.25rem;
+    transition: all 0.25s;
+}
+
+.SignUpForm-input:focus{
+    outline: none;
+    box-shadow: 0 0 10px var(--color-border-input); 
+    transition: all 0.25s;
+}
+
+.SignUpForm-button{
+    width: min(90%, 15.625rem);
+    height: 2.5rem;
+    border-radius: 3px;
+    background-color: white;
+    transition: all 0.25s;
+    font-size: 1rem;
+}
+
+.SignUpForm-button:hover, .SignUpForm-button:focus{
+    outline:none;
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--color-border-input);
+    transition: all 0.25s;
+}
+

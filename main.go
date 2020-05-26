@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Go-Web/controllers"
 	"Go-Web/views"
 	"fmt"
 	"net/http"
@@ -38,6 +39,7 @@ func main() {
 
 	homeView = views.NewView("base", "views/home.gohtml")
 	contactView = views.NewView("base", "views/contact.gohtml")
+	usersC := controllers.NewUsers()
 
 	r := mux.NewRouter()
 	staticDir := "/static/"
@@ -45,6 +47,7 @@ func main() {
 		Handler(http.StripPrefix(staticDir, http.FileServer(http.Dir("."+staticDir))))
 	r.HandleFunc("/", home)
 	r.HandleFunc("/contact", contact)
+	r.HandleFunc("/signup", usersC.New)
 	r.NotFoundHandler = http.HandlerFunc(notFound)
 	http.ListenAndServe(":3000", r)
 }
