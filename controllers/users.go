@@ -4,8 +4,6 @@ import (
 	"Go-Web/views"
 	"fmt"
 	"net/http"
-
-	"github.com/gorilla/schema"
 )
 
 //NewUsers is used to create a new Users controller
@@ -36,15 +34,11 @@ type SignupForm struct {
 //Create is used to process the signup form and create a new user account
 //POST /signup
 func (u *Users) Create(w http.ResponseWriter, r *http.Request) {
-	var decoder = schema.NewDecoder()
 	var SignupForm SignupForm
-
-	err := r.ParseForm()
+	err := parseForm(r, &SignupForm)
 	if err != nil {
 		panic(err)
 	}
-
-	err = decoder.Decode(&SignupForm, r.PostForm)
 
 	fmt.Fprintln(w, SignupForm)
 }
