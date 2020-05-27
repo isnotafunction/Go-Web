@@ -12,18 +12,12 @@ import (
 func NewUsers() *Users {
 
 	return &Users{
-		NewView: views.NewView("base", "views/users/new.gohtml"),
+		New: views.NewView("base", "views/users/newUser.gohtml"),
 	}
 }
 
 type Users struct {
-	NewView *views.View
-}
-
-//New is used to render the signup form used to create a new user account
-//GET /signup
-func (u *Users) New(w http.ResponseWriter, r *http.Request) {
-	u.NewView.Render(w, nil)
+	New *views.View
 }
 
 type SignupForm struct {
